@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css')}}" />
+    <script src="{{ url_for('static', filename='script.js')}}"></script>
+    
+</head>
+
+<body>
+    <img src="{{ url_for('static', filename='') }}" usemap="#circles" width="100%" height="100%" id=""">
+    <div id="square" width="100%" height="100%"></div>
+    <div class="circle"></div>
+    
+    <map name="circles">
+        <area shape="rect" coords="170,326,613,180" href="/" alt="">
+    </map>
+</body>
+</html>
+
+
+
