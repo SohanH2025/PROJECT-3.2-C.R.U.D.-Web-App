@@ -1,13 +1,20 @@
-const myDiv = document.getElementById("square");
+const coordinateDisplay = document.getElementById('coordinate-display');
 
 
 
-myDiv.addEventListener("click", function(event) {
+coordinateDisplay.addEventListener('click', function(event) {
 
-  const clickX = event.clientX;
+  const x = event.clientX;
 
-  const clickY = event.clientY;
+  const y = event.clientY;
 
-  console.log("Clicked at X:", clickX, "Y:", clickY);
+  fetch('/', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({x:x,y:y})
+})
+  /*coordinateDisplay.textContent = `X: ${x}, Y: ${y}`;*/
 
 });

@@ -4,3 +4,9 @@
     background-color: #555;
     border-radius: 50%;
   }
+
+#coordinate-display {
+  width: 100vw;
+  height: 100vh;
+  margin:0px;
+}

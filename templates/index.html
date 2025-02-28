@@ -4,18 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css')}}" />
-    <script src="{{ url_for('static', filename='script.js')}}"></script>
+    
     
 </head>
 
 <body>
-    <img src="{{ url_for('static', filename='') }}" usemap="#circles" width="100%" height="100%" id=""">
-    <div id="square" width="100%" height="100%"></div>
-    <div class="circle"></div>
+    <div id="coordinate-display"></div>
+
+    {% for dot in dots %}
+        <div top="{% dot['x'] %}" left="{% dot['y'] %}" class="circle"></div>
+    {% endfor %}
     
-    <map name="circles">
-        <area shape="rect" coords="170,326,613,180" href="/" alt="">
-    </map>
+    <script src="{{ url_for('static', filename='script.js')}}"></script>
 </body>
 </html>
 
