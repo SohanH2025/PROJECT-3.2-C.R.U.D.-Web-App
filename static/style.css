@@ -3,10 +3,12 @@
     width: 50px;
     background-color: #555;
     border-radius: 50%;
+    position: absolute;
   }
 
 #coordinate-display {
   width: 100vw;
   height: 100vh;
   margin:0px;
+  position: absolute;
 }

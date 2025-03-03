@@ -1,4 +1,4 @@
-from flask import Flask, render_template,request,redirect
+from flask import Flask, render_template,request,redirect,jsonify
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
@@ -11,22 +11,25 @@ class Dot(db.Model):
     x = db.Column(db.Integer)
     y = db.Column(db.Integer)
     def __repr__(self):
-        return {"x":self.x, "y":self.y}
+        #{"x":self.x, "y":self.y}
+        return self.id
 
-@app.route('/', methods=['GET', 'POST'])
-def index():
+@app.route('/data', methods=['GET','POST'])
+def handle_data():
 
     if request.method == 'POST':
-        x = request.form['x']
-        y = request.form['y']
-        new_dot = Dot(x=x, y=y)
+        data = request.get_json()
+        #print(f"the x corrdinate is {data['x']}")
+        new_dot = Dot(x=data['x'], y=data['y'])
         try:
             db.session.add(new_dot)
             db.session.commit()
             return redirect('/')
         except:
             return 'Error adding dot'
-        
+
+@app.route('/')
+def index():
     dots = Dot.query.all()
     return render_template('index.html', dots=dots)
 
