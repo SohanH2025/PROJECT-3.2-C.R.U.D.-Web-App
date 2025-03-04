@@ -14,14 +14,18 @@ coordinateDisplay.addEventListener('click', function(event) {
 
 
   const data = { key1: 'value1', key2: 'value2' };
-  fetch('/data', {
+  fetch('/', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(coords)
   });
-  window.location.replace("/");
+
+  setTimeout(function() {
+    window.location.replace("/");
+    console.log("This message appears after 1 second.");
+  }, 500); // 1000 milliseconds = 1 second
   
   /*coordinateDisplay.textContent = `X: ${x}, Y: ${y}`;*/
 

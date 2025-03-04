@@ -12,7 +12,7 @@
     <div id="coordinate-display"></div>
 
     {% for dot in dots %}
-    <div style="top:{{ dot['y'] }}px;left:{{ dot['x'] }}px;" class="circle"></div> 
+    <a href="/delete/{{dot.id}}"><div style="top:{{ dot['y']-dot.size }}px;left:{{ dot['x']-dot.size }}px;background-color:{{dot.color}};height: {{dot.size * 2}}px;width: {{dot.size * 2}}px;" class="circle"></div></a>
     {% endfor %}
     
     <script src="{{ url_for('static', filename='script.js')}}"></script>
