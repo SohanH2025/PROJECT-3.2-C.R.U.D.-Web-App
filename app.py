@@ -24,8 +24,9 @@ class Dot(db.Model):
         #{"x":self.x, "y":self.y}
         return self.id
 
-@app.route('/', methods=['GET','POST'])
-def handle_data():
+@app.route('/', methods=['GET','POST'], defaults={'width': None, 'height': None})
+@app.route('/<width>/<height>')
+def handle_data(width=None, height=None):
 
     if request.method == 'POST':
         data = request.get_json()
@@ -38,9 +39,63 @@ def handle_data():
         except:
             return 'Error adding dot'
         
+    
+    if not width or not height:
+        return """
+        <script>
+        (() => window.location.href = window.location.href +
+        ['', window.innerWidth, window.innerHeight].join('/'))()
+        </script>
+        """
+    #return 'Hello %s (%s, %s)' %(user, width, height)
+    #print( width, height)
+    #dots = Dot.query.all()
+    #return render_template('index.html', dots=dots)
+    
+    is_full = True
     dots = Dot.query.all()
-    return render_template('index.html', dots=dots)
 
+    for x in range(0,int(width)+1):
+        for y in range(-int(height),1): ##for each pixel
+            print(x,y)
+            print(int(width),int(height))
+            is_in_dot = False
+
+            for dot in dots:
+                print(dot.id)
+                #print(type(dot.x))
+                if ((x-dot.x)**2 + (y+dot.y)**2 <= dot.size**2): #if the pixel is in any dot then set is_in_dot = True
+                    is_in_dot = True
+                    print("is in dot")
+                    break
+
+            if not is_in_dot: #if still not in any dot then the screen isn't full
+                is_full = False
+                print("is not full")
+                break
+        if not is_in_dot: #if still not in any dot then the screen isn't full
+            is_full = False
+            print("is not full")
+            break
+
+    
+    if is_full:
+        return "Page is Full"
+    else:
+        return render_template('index.html', dots=dots)
+
+
+@app.route('/user/<user>', defaults={'width': None, 'height': None})
+@app.route('/user/<user>/<width>/<height>')
+def user(user, width=None, height=None):
+    if not width or not height:
+        return """
+        <script>
+        (() => window.location.href = window.location.href +
+        ['', window.innerWidth, window.innerHeight].join('/'))()
+        </script>
+        """
+    return 'Hello %s (%s, %s)' %(user, width, height)
 
 @app.route('/delete/<int:id>')
 def delete(id):
