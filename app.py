@@ -55,8 +55,8 @@ def handle_data(width=None, height=None):
     is_full = True
     dots = Dot.query.all()
 
-    for x in range(0,int(width)+1):
-        for y in range(-int(height),1): ##for each pixel
+    for x in range(0,(int(width)+1)//72):
+        for y in range((-int(height)//65),1): ##for each pixel
             print(x,y)
             print(int(width),int(height))
             is_in_dot = False
@@ -64,7 +64,7 @@ def handle_data(width=None, height=None):
             for dot in dots:
                 print(dot.id)
                 #print(type(dot.x))
-                if ((x-dot.x)**2 + (y+dot.y)**2 <= dot.size**2): #if the pixel is in any dot then set is_in_dot = True
+                if (((40*x)-dot.x)**2 + ((65*y)+dot.y)**2 <= dot.size**2): #if the pixel is in any dot then set is_in_dot = True
                     is_in_dot = True
                     print("is in dot")
                     break
@@ -80,7 +80,7 @@ def handle_data(width=None, height=None):
 
     
     if is_full:
-        return "Page is Full"
+        return render_template('win.html', dots=dots)
     else:
         return render_template('index.html', dots=dots)
 
@@ -106,6 +106,15 @@ def delete(id):
         return redirect('/')
     except:
         return 'There was a problem deleting that task'
+
+@app.route('/delall')
+def delall():
+    dots = Dot.query.all()
+    for dot in dots:
+        db.session.delete(dot)
+        db.session.commit()
+
+    return redirect('/')
 
 
 if __name__ == "__main__":

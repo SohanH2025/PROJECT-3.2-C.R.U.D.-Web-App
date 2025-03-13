@@ -9,11 +9,11 @@
 </head>
 
 <body>
-    <div id="coordinate-display"><p>click!</p></div>
+    
 
-    {% for dot in dots %}
-    <a href="/delete/{{dot.id}}"><div style="top:{{ dot['y']-dot.size }}px;left:{{ dot['x']-dot.size }}px;background-color:{{dot.color}};height: {{dot.size * 2}}px;width: {{dot.size * 2}}px;" class="circle"></div></a>
-    {% endfor %}
+    <button>
+        <a href="/delall">DELETE ALL DOTS</a>
+    </button>
     
     <script src="{{ url_for('static', filename='script.js')}}"></script>
 </body>
