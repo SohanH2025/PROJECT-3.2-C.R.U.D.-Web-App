@@ -3,13 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mountains+of+Christmas&family=Noto+Sans+Wancho&family=Rock+Salt&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css')}}" />
     
     
 </head>
 
 <body>
-    <div id="coordinate-display"><p>click!</p></div>
+    <div id="coordinate-display"><p class="rock-salt-regular">click !</p></div>
 
     {% for dot in dots %}
     <a href="/delete/{{dot.id}}"><div style="top:{{ dot['y']-dot.size }}px;left:{{ dot['x']-dot.size }}px;background-color:{{dot.color}};height: {{dot.size * 2}}px;width: {{dot.size * 2}}px;" class="circle"></div></a>

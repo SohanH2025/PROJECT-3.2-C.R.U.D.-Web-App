@@ -55,8 +55,8 @@ def handle_data(width=None, height=None):
     is_full = True
     dots = Dot.query.all()
 
-    for x in range(0,(int(width)+1)//72):
-        for y in range((-int(height)//65),1): ##for each pixel
+    for x in range(0,(int(width)-99)//72):
+        for y in range(((-int(height)+100)//65),1): ##for each pixel
             print(x,y)
             print(int(width),int(height))
             is_in_dot = False
